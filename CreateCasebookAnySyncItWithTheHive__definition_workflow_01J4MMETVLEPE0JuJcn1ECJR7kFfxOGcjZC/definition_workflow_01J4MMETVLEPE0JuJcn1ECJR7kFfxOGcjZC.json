@@ -1,0 +1,1746 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01J4MMETVLEPE0JuJcn1ECJR7kFfxOGcjZC",
+    "name": ". . . create Casebook and sync it with TheHive 🐝",
+    "title": ". . . create Casebook and sync it with TheHive 🐝",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_type",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01J4O6A5DMBP24V4PkCX1Jred7P7EVQEuCi",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_value",
+          "type": "datatype.string",
+          "is_required": true
+        },
+        "unique_name": "variable_workflow_01J4O6FVV65X70NholHlpF3NoeYn2vGSf2u",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Takes in any observable:\n-\u003e create a new case in SecureX  casebook case\n-\u003e create an associated The Hive ticket\n-\u003e sync all subsequent observables that are added\n-\u003e starts every applicable Cortex Anaylzer\n\n*** PLEASE MAKE SURE TO SELECT THE NEWLY CREATED CASE BEFORE ADDING NEW OBSERVABLES TO YOUR ACTIVE CASE! ***",
+      "display_name": ". . . create Casebook and sync it with TheHive 🐝",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01J4MUHCXDWX84N4kLaJPYushgaq5e2UX5A",
+        "name": "Create Secure❌ Casebook",
+        "title": "Create Secure❌ Casebook",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Create Secure❌ Casebook",
+          "input": {
+            "variable_workflow_01J2VDAA6XCLS5NK0nFOIw9mv3PxeCBhj4F": "$workflow.definition_workflow_01J4MMETVLEPE0JuJcn1ECJR7kFfxOGcjZC.input.variable_workflow_01J4O6FVV65X70NholHlpF3NoeYn2vGSf2u$",
+            "variable_workflow_01J2VDGBXNMHN0NIGxRKq9Kq6iN8u0c1Ydl": "$workflow.definition_workflow_01J4MMETVLEPE0JuJcn1ECJR7kFfxOGcjZC.input.variable_workflow_01J4O6A5DMBP24V4PkCX1Jred7P7EVQEuCi$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target_group": true,
+            "target_group_id": "target_group_01EJ0TQWPQWBD0qiWqClJKj9FOzwiZRfOFH"
+          },
+          "workflow_id": "definition_workflow_01J2V8CBDGQ6D6OruJtr2CqihCko0TNwDUB"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01J4MUJUSTAW33ioWEILpsKKYkngCJ4lqLz",
+        "name": "Condition Block",
+        "title": "Condition Block",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Condition Block",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01J4MUJYH9DEG21uyNthrFyH5ZAsrrVx2lK",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01J4MUHCXDWX84N4kLaJPYushgaq5e2UX5A.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01J4MVJS4LL4N7F1OceuYHNORBGjchTyezL",
+                "name": "Create TheHive Case 🐝",
+                "title": "Create TheHive Case 🐝",
+                "type": "workflow.sub_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Create TheHive Case 🐝",
+                  "input": {
+                    "variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X": "$workflow.definition_workflow_01J4MMETVLEPE0JuJcn1ECJR7kFfxOGcjZC.input.variable_workflow_01J4O6A5DMBP24V4PkCX1Jred7P7EVQEuCi$",
+                    "variable_workflow_01INF3UDYNQKX5CelhdUCO2erfy6KZzebOc": "$workflow.definition_workflow_01J4MMETVLEPE0JuJcn1ECJR7kFfxOGcjZC.input.variable_workflow_01J4O6FVV65X70NholHlpF3NoeYn2vGSf2u$"
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "no_target": true
+                  },
+                  "workflow_id": "definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01J4MVQJPEUXT2cDgdx5M8sHlDCVuQW9odE",
+                "name": "Condition Block",
+                "title": "Condition Block",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Condition Block",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01J4MVQNUWGYJ3TR9sUel5Arx2HYhNQDtEf",
+                    "name": "Condition Branch",
+                    "title": "Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01J4MVJS4LL4N7F1OceuYHNORBGjchTyezL.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": true
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01J4NVC63GF0G4MbyIwGFhoJcXR2loEtLLz",
+                        "name": "Add Row to Table",
+                        "title": "Add Row to Table",
+                        "type": "core.addrowtotable",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "continue_on_failure": false,
+                          "display_name": "Add Row to Table",
+                          "input_table": "$global.variable_01JJPGR9T4HRL7hnDeeTqluYO99hLQUymiU.global.variable_01JJPGR9T4HRL7hnDeeTqluYO99hLQUymiU$",
+                          "row": [
+                            {
+                              "key": "CaseTitle",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01J4MUHCXDWX84N4kLaJPYushgaq5e2UX5A.output.variable_workflow_01JJQ1ZUTR1X77DXpPwRf3Jqvp7cJP2w1i5$"
+                            },
+                            {
+                              "key": "CasebookID",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01J4MUHCXDWX84N4kLaJPYushgaq5e2UX5A.output.variable_workflow_01J2VFCTA8GX35Wv8XlP18euxthyPF6r7NN$"
+                            },
+                            {
+                              "key": "TheHive_CaseID",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01J4MVJS4LL4N7F1OceuYHNORBGjchTyezL.output.variable_workflow_01J4MKA0Y35CW1SmHxnbKprIkfRDotRn3vZ$"
+                            }
+                          ],
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01J4MVQOVA7WG4NGQ6xC6hw6Uyem3m9Ruff",
+                    "name": "Condition Branch",
+                    "title": "Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01J4MVJS4LL4N7F1OceuYHNORBGjchTyezL.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": false
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01J4MWQBA6PQF09oPUGAuBCCwizZefuhlOY",
+                        "name": "Completed",
+                        "title": "Completed",
+                        "type": "logic.completed",
+                        "base_type": "activity",
+                        "properties": {
+                          "completion_type": "succeeded",
+                          "continue_on_failure": false,
+                          "description": "TheHive Case Creation failed",
+                          "display_name": "Completed",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01J4MUJZGAW955iGrhRUxAP9tRFXGkOZjU0",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01J4MUHCXDWX84N4kLaJPYushgaq5e2UX5A.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01J4MUXXRB1A13nizonBkRCo0XzdQVBeCrw",
+                "name": "Completed",
+                "title": "Completed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "continue_on_failure": false,
+                  "description": "SecureX Casebook creation failed",
+                  "display_name": "Completed",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m"
+    ]
+  },
+  "categories": {
+    "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r": {
+      "unique_name": "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r",
+      "name": "SecureX",
+      "title": "SecureX",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m": {
+      "unique_name": "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m",
+      "name": "response",
+      "title": "response",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_01J34RNXN1I004VFDp1al73guvQFeBwkIyp": {
+      "unique_name": "category_01J34RNXN1I004VFDp1al73guvQFeBwkIyp",
+      "name": "TheHive",
+      "title": "TheHive",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01GXG4DPTICV70VpqXIX0CaYbFsPS5Bqbpe": {
+      "unique_name": "definition_target_01GXG4DPTICV70VpqXIX0CaYbFsPS5Bqbpe",
+      "name": "Private_CTIA_Target",
+      "title": "Private_CTIA_Target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Private_CTIA_Target",
+        "disable_certificate_validation": false,
+        "display_name": "Private_CTIA_Target",
+        "host": "private.intel.eu.amp.cisco.com",
+        "no_runtime_user": true,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01INF591NOZWT4Rq1VbQQB6FAncMRfGlDni": {
+      "unique_name": "definition_target_01INF591NOZWT4Rq1VbQQB6FAncMRfGlDni",
+      "name": "TheHive",
+      "title": "TheHive",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "TheHive Instance\n- to sync up the Cases and Observables\n- to start the Analyzers",
+        "disable_certificate_validation": false,
+        "display_name": "TheHive",
+        "host": "TheHiveFQDN",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "protocol": "https"
+      }
+    }
+  },
+  "target_groups": {
+    "target_group_01EJ0TQWPQWBD0qiWqClJKj9FOzwiZRfOFH": {
+      "unique_name": "target_group_01EJ0TQWPQWBD0qiWqClJKj9FOzwiZRfOFH",
+      "name": "Default TargetGroup",
+      "title": "Default TargetGroup",
+      "type": "generic.target_group",
+      "base_type": "target_group",
+      "version": "1.0.0",
+      "targets": [
+        {
+          "data_target_type": "web-service.endpoint",
+          "view_target_type": "web-service.endpoint",
+          "include_all_targets": true
+        },
+        {
+          "data_target_type": "email.smtp_endpoint",
+          "view_target_type": "email.smtp_endpoint",
+          "include_all_targets": true
+        }
+      ],
+      "object_type": "target_group"
+    }
+  },
+  "variables": {
+    "variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw": {
+      "unique_name": "variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "TheHive___BearerToken",
+        "type": "datatype.secure_string",
+        "is_required": false
+      },
+      "object_type": "variable"
+    },
+    "variable_01JJPGR9T4HRL7hnDeeTqluYO99hLQUymiU": {
+      "unique_name": "variable_01JJPGR9T4HRL7hnDeeTqluYO99hLQUymiU",
+      "schema_id": "tabletype_01JJPDR110GYL3quwelQ3jBzPmD9CpuhIsn",
+      "properties": {
+        "value": [
+          {
+            "column_data": {
+              "CaseTitle": "none",
+              "CasebookID": "123",
+              "TheHive_CaseID": "123"
+            }
+          }
+        ],
+        "scope": "global",
+        "name": "SecureX-TheHive__CaseID__syncTable",
+        "type": "datatype.table",
+        "description": "this table is a 1:1 mapping between the SecureX Casebook Case and the reflect TheHive Case via the ID's\n\n...especially when adding observables to the Casebook we need to sync and reflect it in the correpsonding TheHive Case",
+        "is_required": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_01J33VB182X1Z5J5okMTLiOopr2s6GLBkJk": {
+      "unique_name": "tabletype_01J33VB182X1Z5J5okMTLiOopr2s6GLBkJk",
+      "data_type": "datatype.tabletype",
+      "display_name": "Cortex_Analyzers",
+      "columns": [
+        {
+          "name": "AnalyzerID",
+          "title": "AnalyzerID",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    },
+    "tabletype_01JJPDR110GYL3quwelQ3jBzPmD9CpuhIsn": {
+      "unique_name": "tabletype_01JJPDR110GYL3quwelQ3jBzPmD9CpuhIsn",
+      "data_type": "datatype.tabletype",
+      "display_name": "SecureX-TheHive__CaseID__syncTable",
+      "description": "this table is a 1:1 mapping between the SecureX Casebook Case and the reflect TheHive Case via the ID's\n\n...especially when adding observables to the Casebook we need to sync and reflect it in the correpsonding TheHive Case",
+      "columns": [
+        {
+          "is_required": true,
+          "name": "CasebookID",
+          "title": "CasebookID",
+          "type": "string"
+        },
+        {
+          "is_required": true,
+          "name": "TheHive_CaseID",
+          "title": "TheHive_CaseID",
+          "type": "string"
+        },
+        {
+          "name": "CaseTitle",
+          "title": "CaseTitle",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  },
+  "subworkflows": [
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01J2V8CBDGQ6D6OruJtr2CqihCko0TNwDUB",
+        "name": "Create Secure❌ Casebook",
+        "title": "Create Secure❌ Casebook",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "observable_value",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01J2VDAA6XCLS5NK0nFOIw9mv3PxeCBhj4F",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "observable_type",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01J2VDGBXNMHN0NIGxRKq9Kq6iN8u0c1Ydl",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "CaseTitle",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01JJQ1ZUTR1X77DXpPwRf3Jqvp7cJP2w1i5",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Casebook_ID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01J2VFCTA8GX35Wv8XlP18euxthyPF6r7NN",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "description": "Takes in any observable and will create a new case in casebook. It will also create an associated The Hive ticket, and will sync all subsequent observables that are added. ",
+          "display_name": "Create Secure❌ Casebook",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "execute_on_target_group": true,
+            "target_group": {
+              "target_group_id": "target_group_01EJ0TQWPQWBD0qiWqClJKj9FOzwiZRfOFH",
+              "run_on_all_targets": false,
+              "selected_target_types": [
+                "web-service.endpoint"
+              ],
+              "use_criteria": {
+                "choose_target_using_algorithm": "choose_first_with_matching_criteria",
+                "conditions": [
+                  {
+                    "operator": "eqi",
+                    "left_operand": "$targetgroup.web-service endpoint.input.display_name$",
+                    "right_operand": "CTR_API"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01J2V8FEFX8G27XtZ1tQN0ev0kScrswDEBn",
+            "name": "CTRGenerateAccessToken",
+            "title": "CTRGenerateAccessToken",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": true,
+              "display_name": "CTRGenerateAccessToken",
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target_group_criteria": true,
+                "target_group": {
+                  "run_on_all_targets": false,
+                  "use_criteria": {
+                    "choose_target_using_algorithm": "choose_first_with_matching_criteria",
+                    "conditions": [
+                      {
+                        "left_operand": "$targetgroup.web-service endpoint.input.display_name$",
+                        "operator": "eqi",
+                        "right_operand": "CTR_For_Access_Token"
+                      }
+                    ]
+                  }
+                }
+              },
+              "workflow_id": "definition_workflow_01779LB6MV0P02kvka9TGV5cEam84NrCTy4"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01J3REX1HYVKW4MjOHlsn1zmW7cp09ONDea",
+            "name": "Condition Block",
+            "title": "Condition Block",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Condition Block",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01J3REXDR6N0C3p6yd5smA2qiM0nnCk2hKc",
+                "name": "Condition Branch",
+                "title": "CTR Token Creation Success!",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01J2V8FEFX8G27XtZ1tQN0ev0kScrswDEBn.output.succeeded$",
+                    "operator": "eq",
+                    "right_operand": true
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "CTR Token Creation Success!",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01J2V8FZE501G3jo9J590WWdBOZcVDvzLT1",
+                    "name": "CTR Create Casebook",
+                    "title": "CTR Create Casebook",
+                    "type": "workflow.atomic_workflow",
+                    "base_type": "subworkflow",
+                    "properties": {
+                      "continue_on_failure": true,
+                      "display_name": "CTR Create Casebook",
+                      "input": {
+                        "variable_workflow_01E8OQUDV95VA45dnDR0Kzm5HlMxNSnk7HH": "$activity.definition_activity_01J2V8FEFX8G27XtZ1tQN0ev0kScrswDEBn.output.variable_workflow_01BNOOXA3G6MV1PGAvsfZOKDdMYcE6XS726$",
+                        "variable_workflow_01FI7GJDK40MI6qNg2jcng0YaHlmz0Zgwq5": "created by SecureX Orchestration response action!\n\n--\u003e This Casebook is synced with TheHive \u003c--",
+                        "variable_workflow_01FI7JJEVXRFA5s9maRdVwlqV7ENc6KhST2": "$workflow.definition_workflow_01J2V8CBDGQ6D6OruJtr2CqihCko0TNwDUB.input.variable_workflow_01J2VDAA6XCLS5NK0nFOIw9mv3PxeCBhj4F$ - Created by SecureX Orchestration on:",
+                        "variable_workflow_01FI7NA9QZI9I46crflRbf7I6zIfajxuHrX": "[\n{\n\"type\": \"$workflow.definition_workflow_01J2V8CBDGQ6D6OruJtr2CqihCko0TNwDUB.input.variable_workflow_01J2VDGBXNMHN0NIGxRKq9Kq6iN8u0c1Ydl$\",\n\"value\": \"$workflow.definition_workflow_01J2V8CBDGQ6D6OruJtr2CqihCko0TNwDUB.input.variable_workflow_01J2VDAA6XCLS5NK0nFOIw9mv3PxeCBhj4F$\"\n}\n]",
+                        "variable_workflow_01FRLITVY3NO678mmPZHG5lCdqLjEyY2j1h": "raw"
+                      },
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_01GXG4DPTICV70VpqXIX0CaYbFsPS5Bqbpe",
+                        "target_type": "web-service.endpoint"
+                      },
+                      "workflow_id": "definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r"
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01J3RCXEU9T1K3vJ8kH9TRQkiXriJBKFN0O",
+                    "name": "Condition Block",
+                    "title": "Condition Block",
+                    "type": "logic.if_else",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Condition Block",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "blocks": [
+                      {
+                        "unique_name": "definition_activity_01J3RCXR8I8T00LoIEA0WdMLsRCpaEXsks0",
+                        "name": "Condition Branch",
+                        "title": "Casebook Creation Success!",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$activity.definition_activity_01J2V8FZE501G3jo9J590WWdBOZcVDvzLT1.output.succeeded$",
+                            "operator": "eq",
+                            "right_operand": true
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "Casebook Creation Success!",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01J5CNHU4MW400eqsms7P6r0xYYE3ti3vbY",
+                            "name": "Execute Python Script",
+                            "title": "Sanitize CasebookID",
+                            "type": "python3.script",
+                            "base_type": "activity",
+                            "properties": {
+                              "action_timeout": 180,
+                              "continue_on_failure": false,
+                              "display_name": "Sanitize CasebookID",
+                              "script": "strCasebookID = \"$activity.definition_activity_01J2V8FZE501G3jo9J590WWdBOZcVDvzLT1.output.variable_workflow_01DSFE4QJSRYK67ewkTPGkJ0WaGxQSw7KjQ$\"\nresult = strCasebookID.replace(\"https://private.intel.eu.amp.cisco.com:443/ctia/casebook/\", \"\")",
+                              "script_queries": [
+                                {
+                                  "script_query": "result",
+                                  "script_query_name": "CasebookID",
+                                  "script_query_type": "string"
+                                }
+                              ],
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity"
+                          },
+                          {
+                            "unique_name": "definition_activity_01J2VFFB9A57V62Z8GLm4fnNnIesoNIxnbP",
+                            "name": "Set Variables",
+                            "title": "Update output var with casebook ID",
+                            "type": "core.set_multiple_variables",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Update output var with casebook ID",
+                              "skip_execution": false,
+                              "variables_to_update": [
+                                {
+                                  "variable_to_update": "$workflow.definition_workflow_01J2V8CBDGQ6D6OruJtr2CqihCko0TNwDUB.output.variable_workflow_01J2VFCTA8GX35Wv8XlP18euxthyPF6r7NN$",
+                                  "variable_value_new": "$activity.definition_activity_01J5CNHU4MW400eqsms7P6r0xYYE3ti3vbY.output.script_queries.CasebookID$"
+                                }
+                              ]
+                            },
+                            "object_type": "definition_activity"
+                          },
+                          {
+                            "unique_name": "definition_activity_01J4NVJ5HEVG05dOcjmV70mahlDOJIZw0r6",
+                            "name": "Set Variables",
+                            "title": "Update output var with casebook TITLE",
+                            "type": "core.set_multiple_variables",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Update output var with casebook TITLE",
+                              "skip_execution": false,
+                              "variables_to_update": [
+                                {
+                                  "variable_to_update": "$workflow.definition_workflow_01J2V8CBDGQ6D6OruJtr2CqihCko0TNwDUB.output.variable_workflow_01JJQ1ZUTR1X77DXpPwRf3Jqvp7cJP2w1i5$",
+                                  "variable_value_new": "$workflow.definition_workflow_01J2V8CBDGQ6D6OruJtr2CqihCko0TNwDUB.input.variable_workflow_01J2VDAA6XCLS5NK0nFOIw9mv3PxeCBhj4F$ - Created by SecureX Orchestration on:"
+                                }
+                              ]
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      },
+                      {
+                        "unique_name": "definition_activity_01J3RDQ058RB72fWrljF0CWQuUBQnoFchoR",
+                        "name": "Condition Branch",
+                        "title": "Casebook Creation Failed...",
+                        "type": "logic.condition_block",
+                        "base_type": "activity",
+                        "properties": {
+                          "condition": {
+                            "left_operand": "$activity.definition_activity_01J2V8FZE501G3jo9J590WWdBOZcVDvzLT1.output.succeeded$",
+                            "operator": "eq",
+                            "right_operand": false
+                          },
+                          "continue_on_failure": false,
+                          "display_name": "Casebook Creation Failed...",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01J3RESN9880J5V1256ZooFBkqki6BNqdY0",
+                            "name": "Completed",
+                            "title": "Failed, quit run...",
+                            "type": "logic.completed",
+                            "base_type": "activity",
+                            "properties": {
+                              "completion_type": "succeeded",
+                              "continue_on_failure": false,
+                              "display_name": "Failed, quit run...",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01J3REXEQSBA42K0UUqbXH83q8VJJocXnPN",
+                "name": "Condition Branch",
+                "title": "CTR Token Creation failed...",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01J2V8FEFX8G27XtZ1tQN0ev0kScrswDEBn.output.succeeded$",
+                    "operator": "eq",
+                    "right_operand": false
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "CTR Token Creation failed...",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01J3RFJ524K3N3WGq0ubdpWU2VabHuadAY2",
+                    "name": "Completed",
+                    "title": "Failed, quit run...",
+                    "type": "logic.completed",
+                    "base_type": "activity",
+                    "properties": {
+                      "completion_type": "succeeded",
+                      "continue_on_failure": false,
+                      "display_name": "Failed, quit run...",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "categories": [
+          "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp",
+        "name": "Create TheHive Case 🐝",
+        "title": "Create TheHive Case 🐝",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "TheHiveCase_ID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01J4MKA0Y35CW1SmHxnbKprIkfRDotRn3vZ",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "observable_type",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "observable_value",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01INF3UDYNQKX5CelhdUCO2erfy6KZzebOc",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "local",
+              "name": "observable_type_TheHive",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "description": "Takes in any observable and will create a new case TheHive\n- adds the observable to the Case\n- starts every applicable Anaylzer\n",
+          "display_name": "Create TheHive Case 🐝",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "execute_on_target_group": true,
+            "target_group": {
+              "target_group_id": "target_group_01EJ0TQWPQWBD0qiWqClJKj9FOzwiZRfOFH",
+              "run_on_all_targets": false,
+              "selected_target_types": [
+                "web-service.endpoint"
+              ],
+              "use_criteria": {
+                "choose_target_using_algorithm": "choose_first_with_matching_criteria",
+                "conditions": [
+                  {
+                    "operator": "eqi",
+                    "left_operand": "$targetgroup.web-service endpoint.input.display_name$",
+                    "right_operand": "TheHive"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01INFQ59QUOMN1xHh5e7rzC946uTwZXN86c",
+            "name": "Condition Block",
+            "title": "Which observable type was provided?",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Which observable type was provided?",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01INFQ5EHU6H36fItptxaewHddlvhzXmplV",
+                "name": "Condition Branch",
+                "title": "IP Address",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                    "operator": "eqi",
+                    "right_operand": "IP"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "IP Address",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01IQ3YW4WUH7I7Es27al4fBMMOPdxk7nGm8",
+                    "name": "Set Variables",
+                    "title": "Set Local Variable",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Local Variable",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.local.variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3$",
+                          "variable_value_new": "ip"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01INFQ5FGLMN10soWaGlPCEXFWbd90eVIuA",
+                "name": "Condition Branch",
+                "title": "Hostname",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                    "operator": "eqi",
+                    "right_operand": "hostname"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Hostname",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01IQ3ZJN8H6ST2do1tByuutzWZvcw2JjN6d",
+                    "name": "Set Variables",
+                    "title": "Set Local Variable",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Local Variable",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.local.variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3$",
+                          "variable_value_new": "hostname"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01J5FT59C0VN22zUZwZr6wEV3reUQws7LMH",
+                "name": "Condition Branch",
+                "title": "domain",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                    "operator": "eqi",
+                    "right_operand": "domain"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "domain",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01J5FT5AW6WO93MXE6rgNnfOhQ8xb5YMnvG",
+                    "name": "Set Variables",
+                    "title": "Set Local Variable",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Local Variable",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.local.variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3$",
+                          "variable_value_new": "domain"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01INFQMGCRBPW0uPxbGjurNfZP3uXeQRoPf",
+                "name": "Condition Branch",
+                "title": "AMP GUID",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                    "operator": "eqi",
+                    "right_operand": "amp_computer_guid"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "AMP GUID",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01IQ3ZW196QYG52YfyB8ZdicFKvNNpJeDg4",
+                    "name": "Set Variables",
+                    "title": "Set Local Variable",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Local Variable",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.local.variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3$",
+                          "variable_value_new": "other"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01INFR0IHNYY10r5m2DMeXXu3J1bpMXXug3",
+                "name": "Condition Branch",
+                "title": "URL",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                    "operator": "eqi",
+                    "right_operand": "url"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "URL",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01IQ400569VHG5wVshzS3S4nlFqyMqt9y9Q",
+                    "name": "Set Variables",
+                    "title": "Set Local Variable",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Local Variable",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.local.variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3$",
+                          "variable_value_new": "url"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01IQ409IZXWTA525pGNUHBvDT4rz4pcLASk",
+                "name": "Condition Branch",
+                "title": "SHA256",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                    "operator": "eqi",
+                    "right_operand": "sha256"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "SHA256",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01IQ409KFV7ES5Q8aCtChl0prinA7IPHB8r",
+                    "name": "Set Variables",
+                    "title": "Set Local Variable",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Local Variable",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.local.variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3$",
+                          "variable_value_new": "hash"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01INFSCHU6FXG5IgtywCGRm03MNPkyuI7wO",
+                "name": "Condition Branch",
+                "title": "Something else",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": {
+                      "left_operand": {
+                        "left_operand": {
+                          "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                          "operator": "ne",
+                          "right_operand": "url"
+                        },
+                        "operator": "or",
+                        "right_operand": {
+                          "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                          "operator": "ne",
+                          "right_operand": "ip"
+                        }
+                      },
+                      "operator": "or",
+                      "right_operand": {
+                        "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                        "operator": "ne",
+                        "right_operand": "hostname"
+                      }
+                    },
+                    "operator": "or",
+                    "right_operand": {
+                      "left_operand": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                      "operator": "ne",
+                      "right_operand": "amp_computer_guid"
+                    }
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Something else",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01INFUYXT3IQY2jTzciTsmhIEZMmnECJkcG",
+                    "name": "Completed",
+                    "title": "Unsupported observable",
+                    "type": "logic.completed",
+                    "base_type": "activity",
+                    "properties": {
+                      "completion_type": "failed-completed",
+                      "continue_on_failure": false,
+                      "display_name": "Unsupported observable",
+                      "result_message": "This workflow does not support the observable type $workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3OU4OTOI4ZvxyaXshtPDaMvfXnoT6X$",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01INF2F30DIH22RGQ45MxWyKYhtD8Pi6l0H",
+            "name": "HTTP Request",
+            "title": "Create TheHive Case",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "body": "{\n  \"title\": \"Casebook for $workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3UDYNQKX5CelhdUCO2erfy6KZzebOc$ - Created by SecureX Orchestration\",\n  \"description\": \"This case has been created by Created by SecureX Orchestration and is in sync state to the referenced Casebook Case!\"\n}",
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $global.variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw.global.variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw$"
+                }
+              ],
+              "display_name": "Create TheHive Case",
+              "method": "POST",
+              "relative_url": "/api/case",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01INF591NOZWT4Rq1VbQQB6FAncMRfGlDni"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01ING6REUYR9M1nfawRVEDgj92Fcvn8cawN",
+            "name": "JSONPath Query",
+            "title": "Get CaseID",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Get CaseID",
+              "input_json": "$activity.definition_activity_01INF2F30DIH22RGQ45MxWyKYhtD8Pi6l0H.output.response_body$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$.id",
+                  "jsonpath_query_name": "id",
+                  "jsonpath_query_type": "integer"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01IQ135R1KP142974FPEfqdsb1fXGN2L7iO",
+            "name": "HTTP Request",
+            "title": "Add Observables ",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "body": "{\n  \"dataType\": \"$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.local.variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3$\",\n  \"data\": \"$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.input.variable_workflow_01INF3UDYNQKX5CelhdUCO2erfy6KZzebOc$\"\n}",
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $global.variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw.global.variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw$"
+                }
+              ],
+              "description": "Adding the Observable to the created Case",
+              "display_name": "Add Observables ",
+              "method": "POST",
+              "relative_url": "/api/case/$activity.definition_activity_01ING6REUYR9M1nfawRVEDgj92Fcvn8cawN.output.jsonpath_queries.id$/artifact",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01INF591NOZWT4Rq1VbQQB6FAncMRfGlDni"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01IQ3LXOVFDF17X810RX7SUFhI3RyJ76HVQ",
+            "name": "JSONPath Query",
+            "title": "Get ObservableID",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "description": "in order to run the Analyzer we need to determine the Observable ID",
+              "display_name": "Get ObservableID",
+              "input_json": "$activity.definition_activity_01IQ135R1KP142974FPEfqdsb1fXGN2L7iO.output.response_body$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$..id",
+                  "jsonpath_query_name": "id",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01J34VAMM2I785IcQ8BJ2mfnYBKjdWEjfT9",
+            "name": "Group",
+            "title": "Get Cortex Analyzers by Observable Typ 🌀",
+            "type": "logic.group",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Get Cortex Analyzers by Observable Typ 🌀",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01J34VT1EK01M7h3ex9iZ70D95WMGRXjafW",
+                "name": "Get Cortex Analyzers by ObservableType 🧠",
+                "title": "Get Cortex Analyzers by ObservableType 🧠",
+                "type": "workflow.sub_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Get Cortex Analyzers by ObservableType 🧠",
+                  "input": {
+                    "variable_workflow_01J2U039OKFIL283FQRQSuug5Z4fvgVmhwu": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.local.variable_workflow_01IQ3YO9HMAZK4kQOCSe5PiNaNJ6kIKILY3$"
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "no_target": true
+                  },
+                  "workflow_id": "definition_workflow_01J2U039YMT7908eKHySeUBlY5nQygMaFNl"
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01J401W3TJS5S5Iutn9qAaHbuTdPtAM3LL6",
+                "name": "Condition Block",
+                "title": "Condition Block",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Condition Block",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01J401W9SVZCI3Ikx5aWX2GA21xuCDt6ILx",
+                    "name": "Condition Branch",
+                    "title": "Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01J34VT1EK01M7h3ex9iZ70D95WMGRXjafW.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": true
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01J3I9SRR4E801yuLUUdjvqF4Pu1jbWqepR",
+                        "name": "Group",
+                        "title": "Iterate through Analyzers",
+                        "type": "logic.group",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Iterate through Analyzers",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "actions": [
+                          {
+                            "unique_name": "definition_activity_01J3I9RD07TOP3WanRMYU7QeRkww9fyXqgk",
+                            "name": "For Each",
+                            "title": "For Each",
+                            "type": "logic.for_each",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "For Each",
+                              "skip_execution": false,
+                              "source_array": "$activity.definition_activity_01J34VT1EK01M7h3ex9iZ70D95WMGRXjafW.output.variable_workflow_01J33VIXH6F0O4d7b9GisqtBwl120cot6TE$"
+                            },
+                            "object_type": "definition_activity",
+                            "actions": [
+                              {
+                                "unique_name": "definition_activity_01J2TO5Q2P2ZJ5rF862v1FcTD9Lgeckmyf2",
+                                "name": "HTTP Request",
+                                "title": "Run ThreatResponse Analyzer",
+                                "type": "web-service.http_request",
+                                "base_type": "activity",
+                                "properties": {
+                                  "action_timeout": 180,
+                                  "allow_auto_redirect": true,
+                                  "body": "{\n  \"cortexId\": \"Cortex\",\n  \"artifactId\": \"$activity.definition_activity_01IQ3LXOVFDF17X810RX7SUFhI3RyJ76HVQ.output.jsonpath_queries.id$\",\n  \"analyzerId\": \"$activity.definition_activity_01J3I9RD07TOP3WanRMYU7QeRkww9fyXqgk.input.source_array[@].AnalyzerID$\"\n}",
+                                  "content_type": "application/json",
+                                  "continue_on_error_status_code": false,
+                                  "continue_on_failure": true,
+                                  "custom_headers": [
+                                    {
+                                      "name": "Authorization",
+                                      "value": "Bearer $global.variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw.global.variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw$"
+                                    }
+                                  ],
+                                  "description": "start to run the Analyzer in TheHive",
+                                  "display_name": "Run ThreatResponse Analyzer",
+                                  "method": "POST",
+                                  "relative_url": "/api/connector/cortex/job",
+                                  "runtime_user": {
+                                    "override_target_runtime_user": false,
+                                    "target_default": true
+                                  },
+                                  "skip_execution": false,
+                                  "target": {
+                                    "override_workflow_target": true,
+                                    "target_id": "definition_target_01INF591NOZWT4Rq1VbQQB6FAncMRfGlDni"
+                                  }
+                                },
+                                "object_type": "definition_activity"
+                              }
+                            ]
+                          },
+                          {
+                            "unique_name": "definition_activity_01J4MKVVQY6SL6YWPw48A6s9PBUHBLyMWs3",
+                            "name": "Set Variables",
+                            "title": "Update output var with TheHive Case ID",
+                            "type": "core.set_multiple_variables",
+                            "base_type": "activity",
+                            "properties": {
+                              "continue_on_failure": false,
+                              "display_name": "Update output var with TheHive Case ID",
+                              "skip_execution": false,
+                              "variables_to_update": [
+                                {
+                                  "variable_to_update": "$workflow.definition_workflow_01INF2B36534M2KOKun2vN3oxTwawCMUSBp.output.variable_workflow_01J4MKA0Y35CW1SmHxnbKprIkfRDotRn3vZ$",
+                                  "variable_value_new": "$activity.definition_activity_01ING6REUYR9M1nfawRVEDgj92Fcvn8cawN.output.jsonpath_queries.id$"
+                                }
+                              ]
+                            },
+                            "object_type": "definition_activity"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "unique_name": "definition_activity_01J401WAUVJDP0rPyUwcWaJ29FYhvaLgcsj",
+                    "name": "Condition Branch",
+                    "title": "Condition Branch",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01J34VT1EK01M7h3ex9iZ70D95WMGRXjafW.output.succeeded$",
+                        "operator": "eq",
+                        "right_operand": false
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Condition Branch",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01J40378U6LAH4qmGc0W8141AaPKFvFOIFn",
+                        "name": "Completed",
+                        "title": "Completed",
+                        "type": "logic.completed",
+                        "base_type": "activity",
+                        "properties": {
+                          "completion_type": "succeeded",
+                          "continue_on_failure": false,
+                          "description": "Failed, quit run...",
+                          "display_name": "Completed",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "categories": [
+          "category_01EI33LMFFL7N5eTQLsOOJIrxdlSOHb7r3r"
+        ]
+      },
+      "subworkflows": [
+        {
+          "workflow": {
+            "unique_name": "definition_workflow_01J2U039YMT7908eKHySeUBlY5nQygMaFNl",
+            "name": "Get Cortex Analyzers by ObservableType 🧠",
+            "title": "Get Cortex Analyzers by ObservableType 🧠",
+            "type": "generic.workflow",
+            "base_type": "workflow",
+            "variables": [
+              {
+                "schema_id": "tabletype_01J33VB182X1Z5J5okMTLiOopr2s6GLBkJk",
+                "properties": {
+                  "scope": "output",
+                  "name": "output_AnalyzerTable",
+                  "type": "datatype.table",
+                  "is_required": false
+                },
+                "unique_name": "variable_workflow_01J33VIXH6F0O4d7b9GisqtBwl120cot6TE",
+                "object_type": "variable_workflow"
+              },
+              {
+                "schema_id": "datatype.string",
+                "properties": {
+                  "value": "",
+                  "scope": "local",
+                  "name": "observable_type_TheHive",
+                  "type": "datatype.string",
+                  "is_required": false
+                },
+                "unique_name": "variable_workflow_01J34S32DNDD97XUaNIW69RFKqWkszdG6lv",
+                "object_type": "variable_workflow"
+              },
+              {
+                "schema_id": "datatype.string",
+                "properties": {
+                  "value": "",
+                  "scope": "input",
+                  "name": "observable_type",
+                  "type": "datatype.string",
+                  "is_required": false
+                },
+                "unique_name": "variable_workflow_01J2U039OKFIL283FQRQSuug5Z4fvgVmhwu",
+                "object_type": "variable_workflow"
+              }
+            ],
+            "properties": {
+              "atomic": {
+                "is_atomic": false
+              },
+              "delete_workflow_instance": false,
+              "description": "possible ObservableType's are defined in TheHive!!",
+              "display_name": "Get Cortex Analyzers by ObservableType 🧠",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "specify_on_workflow_start": false,
+                "target_default": true
+              },
+              "target": {
+                "execute_on_target_group": false,
+                "execute_on_workflow_target": false,
+                "no_target": true,
+                "specify_on_workflow_start": false
+              }
+            },
+            "object_type": "definition_workflow",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01J2U067K79NW28wIV39uIJ1cAlHnmhuVDX",
+                "name": "HTTP Request",
+                "title": "List analyzers for OBSERVABLE TYPE",
+                "type": "web-service.http_request",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "allow_auto_redirect": true,
+                  "content_type": "application/json",
+                  "continue_on_error_status_code": false,
+                  "continue_on_failure": false,
+                  "custom_headers": [
+                    {
+                      "name": "Authorization",
+                      "value": "Bearer $global.variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw.global.variable_01JFSSZPEIFML6kKBvOTdiRsSYJveW6WDCw$"
+                    }
+                  ],
+                  "description": "List analyzers matching the dataType\n",
+                  "display_name": "List analyzers for OBSERVABLE TYPE",
+                  "method": "GET",
+                  "relative_url": "/api/connector/cortex/analyzer/type/$workflow.definition_workflow_01J2U039YMT7908eKHySeUBlY5nQygMaFNl.input.variable_workflow_01J2U039OKFIL283FQRQSuug5Z4fvgVmhwu$",
+                  "runtime_user": {
+                    "override_target_runtime_user": false,
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01INF591NOZWT4Rq1VbQQB6FAncMRfGlDni"
+                  }
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01J2U06E88GE17TUJXAp5Amm7hCKBdKnJhk",
+                "name": "JSONPath Query",
+                "title": "Get Analyzer IDs",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Get Analyzer IDs",
+                  "input_json": "$activity.definition_activity_01J2U067K79NW28wIV39uIJ1cAlHnmhuVDX.output.response_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$..id",
+                      "jsonpath_query_name": "id",
+                      "jsonpath_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01J34D5IL8UI557sCbm7SQLPjqFUNSR0kzp",
+                "name": "Execute Python Script",
+                "title": "Sanitize and Convert List",
+                "type": "python3.script",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Sanitize and Convert List",
+                  "script": "list_Analyzers = $activity.definition_activity_01J2U06E88GE17TUJXAp5Amm7hCKBdKnJhk.output.jsonpath_queries.id$\nstring_Analyzers = str(list_Analyzers).strip('[]')\nsanitized_Analyzers = string_Analyzers.replace(\" \", \"\")\nresult = sanitized_Analyzers.replace(\"'\",\"\")",
+                  "script_queries": [
+                    {
+                      "script_query": "result",
+                      "script_query_name": "CortexAnalyzers",
+                      "script_query_type": "string"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01J33PNH8M6F41dhhZh0MDxYxgp9FCv4iMX",
+                "name": "Group",
+                "title": "Iterate through Analyzers",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Iterate through Analyzers",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01J33QT8FOCLZ0qMrRSB4M6XEPLlWod7ybY",
+                    "name": "Split String",
+                    "title": "Split String",
+                    "type": "core.splitstring",
+                    "base_type": "activity",
+                    "properties": {
+                      "boundaries": [
+                        {
+                          "boundary": ","
+                        }
+                      ],
+                      "continue_on_failure": false,
+                      "display_name": "Split String",
+                      "input_string": "$activity.definition_activity_01J34D5IL8UI557sCbm7SQLPjqFUNSR0kzp.output.script_queries.CortexAnalyzers$",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01J33QVT6TG180fdzOuS3qJhPYDEsFN96aF",
+                    "name": "For Each",
+                    "title": "For Each",
+                    "type": "logic.for_each",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "For Each",
+                      "skip_execution": false,
+                      "source_array": "$activity.definition_activity_01J33QT8FOCLZ0qMrRSB4M6XEPLlWod7ybY.output.parts$"
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01J33VXWFRLY45TXt8AMCUgMvAnfGV717Xd",
+                        "name": "Add Row to Table",
+                        "title": "Add Value to Output",
+                        "type": "core.addrowtotable",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "continue_on_failure": false,
+                          "display_name": "Add Value to Output",
+                          "input_table": "$workflow.definition_workflow_01J2U039YMT7908eKHySeUBlY5nQygMaFNl.output.variable_workflow_01J33VIXH6F0O4d7b9GisqtBwl120cot6TE$",
+                          "row": [
+                            {
+                              "key": "AnalyzerID",
+                              "type": "string",
+                              "value": "$activity.definition_activity_01J33QVT6TG180fdzOuS3qJhPYDEsFN96aF.input.source_array[@]$"
+                            }
+                          ],
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "categories": [
+              "category_01J34RNXN1I004VFDp1al73guvQFeBwkIyp"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "atomic_workflows": [
+    "definition_workflow_01DS6ELBOO8YR3uFJZju566LqiqR18VlE6r",
+    "definition_workflow_01779LB6MV0P02kvka9TGV5cEam84NrCTy4"
+  ]
+}
