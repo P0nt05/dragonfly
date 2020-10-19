@@ -16,7 +16,7 @@ Add GitHub Repo to your SXO instance to import the SXO Workflows.
 3. Use the following **DISPLAY NAME**: **CiscoSecureX-TheHive** and the following details:
   * **DEFAULT ACCOUNT KEYS**: **Git_Credentials**
   * **PROTOCOL** set to **HTTPS**
-  * **REST API REPOSITORY**: **api.github.com/repos/P0nt05/CiscoSecureX-TheHive**
+  * **REST API REPOSITORY**: **api.github.com/repos/P0nt05/dragonfly**
   * **BRANCH**: **main**
   * Leave all other fields on default/empty and click **SUBMIT**.
   * ![git_2_RepData](/IMAGES/git_2_RepData.jpg)
