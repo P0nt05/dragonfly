@@ -49,4 +49,4 @@ The goal is to handover Observables from SecureX to TheHive via the built-in orc
 ![TheHive_Added_observables_in_case_analyzer_starts GIF](/IMAGES/TheHive_Added_observables_in_case_analyzer_starts.gif)
 
 # Installation
-## Detailed installation instructions can be found [HERE](https://github.com/P0nt05/dragonfly/main/INSTALL.md)
+## Detailed installation instructions can be found [HERE](https://github.com/P0nt05/dragonfly/blob/main/INSTALL.md)
